@@ -95,7 +95,7 @@ public class Point implements Comparable<Point> {
         /* YOUR CODE HERE */
         if (y < that.getY() || y == that.getY() && x < that.getX()) {
             return -1;
-        } else if () {
+        } else {
             return 1;
         }
     }

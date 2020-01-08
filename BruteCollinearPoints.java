@@ -2,7 +2,7 @@ import java.util.Arrays;
 import edu.princeton.cs.algs4.ResizingArrayBag;
 
 public class BruteCollinearPoints {
-    private ResizingArrayBag<LineSegment> lineSegments = new ResizingArrayBag<>();
+    private final ResizingArrayBag<LineSegment> lineSegments = new ResizingArrayBag<>();
 
     // finds all line segments containing 4 points
     public BruteCollinearPoints(Point[] points) {
@@ -14,7 +14,7 @@ public class BruteCollinearPoints {
             if (points[x] == null) {
                 throw new IllegalArgumentException("Array contains is null");
             } else if (x > 0) {
-                if (points[x-1].toString().equals(points[x].toString())) {
+                if (points[x-1].compareTo((points[x])) == 0) {
                     throw new IllegalArgumentException("Array contains a duplicate");
                 }
             }
@@ -71,5 +71,4 @@ public class BruteCollinearPoints {
         }
         return returnSegments;
     }
-
 }

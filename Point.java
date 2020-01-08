@@ -63,20 +63,20 @@ public class Point implements Comparable<Point> {
         if (x == that.getX() && y == that.getY()) {
             return Double.NEGATIVE_INFINITY;
         } else if (x == that.getX()) {
-            return 0.0;
-        } else if (y = that.getY()) {
             return Double.POSITIVE_INFINITY;
+        } else if (y == that.getY()) {
+            return 0.0;
         } else {
             return (that.getY() - y)/(that.getX() - x);
         }
     }
 
-    public int getX() {
-        return this.x;
+    private double getX() {
+        return (double)this.x;
     }
 
-    public int getY() {
-        return this.y;
+    private double getY() {
+        return (double)this.y;
     }
 
     /**
@@ -95,6 +95,8 @@ public class Point implements Comparable<Point> {
         /* YOUR CODE HERE */
         if (y < that.getY() || y == that.getY() && x < that.getX()) {
             return -1;
+        } else if (y == that.getY() && x == that.getX()){
+            return 0;
         } else {
             return 1;
         }
@@ -108,12 +110,25 @@ public class Point implements Comparable<Point> {
      */
     public Comparator<Point> slopeOrder() {
         /* YOUR CODE HERE */
-        return new BySlope();
+        return new BySlope(this);
     }
 
-    private static class BySlope implements Comparator<Point> {
+    private class BySlope implements Comparator<Point> {
+
+        private final Point point;
+
+        BySlope(Point point) {
+            this.point = point;
+        }
+
         public int compare(Point a, Point b) {
-            return slopeTo(a) - slopeTo(b)
+            if (slopeTo(a) < slopeTo(b)) {
+                return -1;
+            } else if (slopeTo(a) == slopeTo(b)) {
+                return 0;
+            } else {
+                return 1;
+            }
         }
     }
 

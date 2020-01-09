@@ -9,43 +9,47 @@ public class BruteCollinearPoints {
         if (points == null) {
             throw new IllegalArgumentException("Array is null");
         }
-        Arrays.sort(points);
         for (int x = 0; x < points.length; x++) {
             if (points[x] == null) {
-                throw new IllegalArgumentException("Array contains is null");
-            } else if (x > 0) {
-                if (points[x-1].compareTo((points[x])) == 0) {
+                throw new IllegalArgumentException("Array contains null");
+            }
+        }
+        Point[] pointsCopy = points.clone();
+        Arrays.sort(pointsCopy);
+        for (int x = 0; x < pointsCopy.length; x++) {
+            if (x > 0) {
+                if (pointsCopy[x-1].compareTo((pointsCopy[x])) == 0) {
                     throw new IllegalArgumentException("Array contains a duplicate");
                 }
             }
         }
-        for (int i = 0; i < points.length - 3; i++) {
-            for (int j = i + 1; j < points.length - 2; j++) {
-                for (int k = j + 1; k < points.length - 1; k++) {
-                    for (int l = k + 1; l < points.length; l++) {
-                        if (points[i].slopeTo(points[j]) == points[i].slopeTo(points[k]) && points[i].slopeTo(points[j]) == points[i].slopeTo(points[l])) {
+        for (int i = 0; i < pointsCopy.length - 3; i++) {
+            for (int j = i + 1; j < pointsCopy.length - 2; j++) {
+                for (int k = j + 1; k < pointsCopy.length - 1; k++) {
+                    for (int l = k + 1; l < pointsCopy.length; l++) {
+                        if (pointsCopy[i].slopeTo(pointsCopy[j]) == pointsCopy[i].slopeTo(pointsCopy[k]) && pointsCopy[i].slopeTo(pointsCopy[j]) == pointsCopy[i].slopeTo(pointsCopy[l])) {
 
                             Point first = null;
                             Point second = null;
 
-                            if (points[i].compareTo(points[j]) + points[i].compareTo(points[k]) + points[i].compareTo(points[l]) == 3) {
-                                first = points[i];
-                            } else if (points[j].compareTo(points[i]) + points[j].compareTo(points[k]) + points[j].compareTo(points[l]) == 3) {
-                                first = points[j];
-                            } else if (points[k].compareTo(points[j]) + points[k].compareTo(points[i]) + points[k].compareTo(points[l]) == 3) {
-                                first = points[k];
+                            if (pointsCopy[i].compareTo(pointsCopy[j]) + pointsCopy[i].compareTo(pointsCopy[k]) + pointsCopy[i].compareTo(pointsCopy[l]) == 3) {
+                                first = pointsCopy[i];
+                            } else if (pointsCopy[j].compareTo(pointsCopy[i]) + pointsCopy[j].compareTo(pointsCopy[k]) + pointsCopy[j].compareTo(pointsCopy[l]) == 3) {
+                                first = pointsCopy[j];
+                            } else if (pointsCopy[k].compareTo(pointsCopy[j]) + pointsCopy[k].compareTo(pointsCopy[i]) + pointsCopy[k].compareTo(pointsCopy[l]) == 3) {
+                                first = pointsCopy[k];
                             } else {
-                                first = points[l];
+                                first = pointsCopy[l];
                             }
 
-                            if (points[i].compareTo(points[j]) + points[i].compareTo(points[k]) + points[i].compareTo(points[l]) == -3) {
-                                second = points[i];
-                            } else if (points[j].compareTo(points[i]) + points[j].compareTo(points[k]) + points[j].compareTo(points[l]) == -3) {
-                                second = points[j];
-                            } else if (points[k].compareTo(points[j]) + points[k].compareTo(points[i]) + points[k].compareTo(points[l]) == -3) {
-                                second = points[k];
+                            if (pointsCopy[i].compareTo(pointsCopy[j]) + pointsCopy[i].compareTo(pointsCopy[k]) + pointsCopy[i].compareTo(pointsCopy[l]) == -3) {
+                                second = pointsCopy[i];
+                            } else if (pointsCopy[j].compareTo(pointsCopy[i]) + pointsCopy[j].compareTo(pointsCopy[k]) + pointsCopy[j].compareTo(pointsCopy[l]) == -3) {
+                                second = pointsCopy[j];
+                            } else if (pointsCopy[k].compareTo(pointsCopy[j]) + pointsCopy[k].compareTo(pointsCopy[i]) + pointsCopy[k].compareTo(pointsCopy[l]) == -3) {
+                                second = pointsCopy[k];
                             } else {
-                                second = points[l];
+                                second = pointsCopy[l];
                             }
                             LineSegment segment = new LineSegment(first, second);
                             lineSegments.add(segment);
